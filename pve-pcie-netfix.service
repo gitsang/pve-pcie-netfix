@@ -1,0 +1,18 @@
+[Unit]
+Description=PVE PCIe Network Interface Fix Service
+Documentation=https://github.com/gitsang/pve-pcie-netfix
+After=network-pre.target
+Before=network.target networking.service
+Wants=network-pre.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/pve-pcie-netfix.sh
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target
